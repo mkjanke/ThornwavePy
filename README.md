@@ -40,6 +40,24 @@ Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
 
   The script will read and parse the data in 0x15.
 
+Data Format:
+
+  Fields
+  
+     0 - 2:  Unknown
+     3    :  Pect Charged, LSB must be stripped
+     7 - 4:  V1 volts, LSB, 32-bit float
+    11 - 8:  V2 volts, LSB, 32-bit float
+    15 - 12: Current (amps), LSB, 32-bit float
+    19 - 16: Power (watts), LSB, 32-bit float
+    23 - 20: Temperature (C), LSB, 32-bit float
+    31 - 24: Power Meter (watts * 1000), 64-bit int
+    39 - 32: Charge Meter (Amp-hours * 1000), 64-bit int
+    43 - 40: Uptime (seconds), unsigned 32-bit int
+    47 - 44: Date/Time (unknown format)
+    51 - 48: Peak Current, 32-bit float
+    52+    : Unknown
+
 Help:
 
     sudo ./thornwavepy -h
