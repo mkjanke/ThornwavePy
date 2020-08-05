@@ -4,6 +4,7 @@ Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor <
   * Tested on Raspberry Pi 3b+ Raspbian 5.4 with default BT stack.
 
 Inspiration and data format credit to Stuart Wilde via this forum post:
+
     https://www.irv2.com/forums/f54/thornwave-battery-monitor-375463.html#post4215155
 
 Setup:
@@ -45,7 +46,7 @@ Data Format:
   Fields
   
      0 - 2:  Unknown
-     3    :  Pect Charged, LSB must be stripped
+     3    :  Pct Charged, LSB must be stripped
      7 - 4:  V1 volts, LSB, 32-bit float
     11 - 8:  V2 volts, LSB, 32-bit float
     15 - 12: Current (amps), LSB, 32-bit float
