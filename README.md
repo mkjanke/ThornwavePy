@@ -1,4 +1,4 @@
-Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor.
+Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor <https://www.thornwave.com/>.
 
   * Requires functioning BlueTooth stack & gatttool.
   * Tested on Raspberry Pi 3b+ Raspbian 5.4 with default BT stack.
