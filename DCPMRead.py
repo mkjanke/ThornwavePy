@@ -26,6 +26,7 @@ import subprocess
 import sys
 import struct
 from datetime import datetime
+from datetime import timedelta
 
 # Slurp up command line arguments
 __author__ = 'Michael Janke'
@@ -120,7 +121,7 @@ ChargeMeter = (struct.unpack('!q', bytes.fromhex(gattList[i+7] + gattList[i+6] +
 i=40
 TimeSinceStart = struct.unpack('!I', bytes.fromhex(gattList[i+3] + gattList[i+2] + gattList[i + 1] + gattList[i]))[0]
 
-#Time in packed format - uint32
+#Date/Time in unknown packed format - uint32
 i=44
 CurrentTime = struct.unpack('!I', bytes.fromhex(gattList[i+3] + gattList[i+2] + gattList[i + 1] + gattList[i]))[0]
 
@@ -131,20 +132,22 @@ PeakCurrent = struct.unpack('!f', bytes.fromhex(gattList[i+3] + gattList[i+2] + 
 if args.Human:
 # Output in somewhat human readable format. 
 
+    delta = str(timedelta(seconds=TimeSinceStart))
+
     print (
-	'Time:            {timeNow}\n'
-	'Device:          {args.BLEaddress}\n'
-	'Pct Charged:     {PctCharged:6.1f}%\n'
-	'V1 Volts:        {V1Volts:6.3f}V\n'
-	'V2 Volts:        {V2Volts:6.3f}V\n'
-        'Current:         {Current:6.2f}A\n'
-        'Power:           {Power:6.2f}W\n'
-        'Temperature:     {Temperature:6.1f}C\n'
-        'Power Meter:     {PowerMeter:8.2f}Ah\n'
-        'Charge Meter:    {ChargeMeter:6.2f}W\n'
-        'Uptime:          {TimeSinceStart}\n'
-        'Date/Time:       {CurrentTime}\n'
-        'Peak Current:    {PeakCurrent:6.2f}Ah'.format(**vars()))
+	'Time:            {timeNow:>20s}\n'
+	'Device:          {args.BLEaddress:>20s}\n'
+	'Pct Charged:     {PctCharged:>19.1f}%\n'
+	'V1 Volts:        {V1Volts:>19.3f}V\n'
+	'V2 Volts:        {V2Volts:>19.3f}V\n'
+        'Current:         {Current:>19.2f}A\n'
+        'Power:           {Power:>19.2f}W\n'
+        'Temperature:     {Temperature:>19.1f}C\n'
+        'Power Meter:     {PowerMeter:>18.2f}Ah\n'
+        'Charge Meter:    {ChargeMeter:>19.2f}W\n'
+        'Uptime:          {delta:>20s}\n'
+        'Date/Time:       {CurrentTime:>20d}\n'
+        'Peak Current:    {PeakCurrent:>18.2f}Ah'.format(**vars()))
 
 else:
 # Output formatted as parsable plain text I.E.:
