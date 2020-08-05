@@ -51,8 +51,7 @@ Help:
 
 To run:
 
-sudo ./thornwavepy -b <bluetooth address>
-
+    sudo ./thornwavepy -b <bluetooth address>
 
 Notes:
 
