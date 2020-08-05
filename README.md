@@ -61,9 +61,9 @@ Data Format:
 
 Help:
 
-    sudo ./thornwavepy -h
+    sudo ./DCPMRead.py -h
     
-    usage: thornwave.py [-h] -b BLEADDRESS [-P | -H]
+    usage: DCPMRead.py [-h] -b BLEADDRESS [-P | -H]
     Thornwave BT DCPM slurper. Reads and outputs BT DCPM data
     optional arguments:
       -h, --help            show this help message and exit
