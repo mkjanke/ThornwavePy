@@ -36,6 +36,25 @@ Setup:
 
   The script will read and parse the data in 0x15.
 
+Help:
+  sudo ./thornwavepy -h
+  
+  usage: thornwave.py [-h] -b BLEADDRESS [-P | -H]
+
+  Thornwave BT DCPM slurper. Reads and outputs BT DCPM data
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    -b BLEADDRESS, --BLEaddress BLEADDRESS
+                          BT DCPM BLE Address
+    -P, --Parsable        Machine parsable output (default)
+    -H, --Human           Human readable output
+
+To run:
+  sudo ./thornwavepy -b <bluetooth address>
+
+
 Notes:
 
   * bluetoothctl and gatttool may require sudo privs. The python script may also need sudo privs. 
+
