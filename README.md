@@ -4,7 +4,8 @@ Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor <
   * Tested on Raspberry Pi 3b+ Raspbian 5.4 with default BT stack.
 
 Setup:
-  Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
+
+Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
   
     sudo bluetoothctl
     [bluetooth]# scan on
@@ -55,5 +56,6 @@ To run:
 
 Notes:
 
-  * bluetoothctl and gatttool may require sudo privs. The python script may also need sudo privs. 
+  * bluetoothctl and gatttool may require sudo privs. The python script may also need sudo privs.
+  * To create log, run periodically from cron & pipe outputto a file with >>
 
