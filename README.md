@@ -71,6 +71,7 @@ Help:
                             BT DCPM BLE Address
       -P, --Parsable        Machine parsable output (default)
       -H, --Human           Human readable output
+      -J, --JSON            JSON output
 
 To run:
 
