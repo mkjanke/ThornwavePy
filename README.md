@@ -74,7 +74,7 @@ Help:
 
 To run:
 
-    sudo ./thornwavepy -b <bluetooth address>
+    sudo ./DCPMRead.py -b <bluetooth address>
 
 Notes:
 
