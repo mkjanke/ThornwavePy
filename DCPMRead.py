@@ -36,10 +36,11 @@ parser.add_argument("-b", "--BLEaddress", help="BT DCPM BLE Address", required=T
 
 group.add_argument("-P", "--Parsable", help="Machine parsable output (default)", action="store_true")
 group.add_argument("-H", "--Human", help="Human readable output", action="store_true")
+group.add_argument("-J", "--JSON", help="JSON output", action="store_true")
 
 args = parser.parse_args()
 
-timeNow = (datetime.now()).strftime("%d/%m/%Y %H:%M:%S")
+timeNow = (datetime.now()).strftime("%x %X")
 
 # Shell out and use gatttool to read from Thornwave BT-DCPM
 # -b is mac address of Thornwave 
@@ -129,10 +130,10 @@ CurrentTime = struct.unpack('!I', bytes.fromhex(gattList[i+3] + gattList[i+2] + 
 i=48
 PeakCurrent = struct.unpack('!f', bytes.fromhex(gattList[i+3] + gattList[i+2] + gattList[i + 1] + gattList[i]))[0]
 
+delta = str(timedelta(seconds=TimeSinceStart))
+
 if args.Human:
 # Output in somewhat human readable format. 
-
-    delta = str(timedelta(seconds=TimeSinceStart))
 
     print (
 	'Time:            {timeNow:>20s}\n'
@@ -146,8 +147,32 @@ if args.Human:
         'Power Meter:     {PowerMeter:>18.2f}Ah\n'
         'Charge Meter:    {ChargeMeter:>19.2f}W\n'
         'Uptime:          {delta:>20s}\n'
-        'Date/Time:       {CurrentTime:>20d}\n'
+        'Device Time:     {CurrentTime:>20d}\n'
         'Peak Current:    {PeakCurrent:>18.2f}Ah'.format(**vars()))
+
+elif args.JSON:
+# Output in JSON
+# split timeNow into separate fields
+    dateSplit=timeNow.split()[0]
+    timeSplit=timeNow.split()[1]
+
+    print('{ ', end =" ")
+    print(
+	'"Date": "{dateSplit}", '
+        '"GMT": "{timeSplit}", '
+        '"Address": "{args.BLEaddress}", '
+        '"Charge": "{PctCharged:.1f}", '
+        '"V1": "{V1Volts:.3f}", '
+        '"V2": "{V2Volts:.3f}", '
+        '"Current": "{Current:.2f}", '
+        '"Watts": "{Power:.2f}", '
+        '"Temperature": "{Temperature:.1f}", '
+        '"PowerMeter": "{PowerMeter:.2f}", '
+        '"ChargeMeter": "{ChargeMeter:.2f}", '
+        '"Uptime": "{delta}", '
+        '"DeviceTime": "{CurrentTime:d}", '
+        '"PeakCurrent": "{PeakCurrent:.2f}" '.format(**vars()), end =" ")
+    print('}')
 
 else:
 # Output formatted as parsable plain text I.E.:
