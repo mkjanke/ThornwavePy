@@ -73,7 +73,8 @@ try:
   p = Peripheral(args.BLEaddress, addrType="random")
 
 except BTLEException as ex:
-  print("Read failed. ", ex)
+  if args.verbose:
+    print("Read failed. ", ex)
   exit
 
 else:
