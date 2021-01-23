@@ -49,6 +49,7 @@
 
 import argparse
 import struct
+import time
 from datetime import datetime
 from datetime import timedelta
 from bluepy.btle import Peripheral, BTLEException
@@ -75,7 +76,13 @@ try:
 except BTLEException as ex:
   if args.verbose:
     print("Read failed. ", ex)
-  exit
+  time.sleep(10)
+  try:
+     p = Peripheral(args.BLEaddress, addrType="random")
+  except:
+     if args.verbose:
+       print("Read failed. ", ex)
+     exit
 
 else:
   result=p.readCharacteristic(0x15)
