@@ -72,6 +72,7 @@ Help:
       -P, --Parsable        Machine parsable output (default)
       -H, --Human           Human readable output
       -J, --JSON            JSON output
+      -v, --verbose         debug output
 
 To run:
 
@@ -80,5 +81,5 @@ To run:
 Notes:
 
   * bluetoothctl and gatttool may require sudo privs. The python script may also need sudo privs.
-  * To create log, run periodically from cron & pipe outputto a file with >>
+  * To create log, run periodically from cron & pipe output to a file with >>
 
