@@ -70,6 +70,7 @@ args = parser.parse_args()
 
 timeNow = (datetime.now()).strftime("%x %X")
 
+# Connect to thornwave. Try twice, then fail 
 try:
   p = Peripheral(args.BLEaddress, addrType="random")
 
