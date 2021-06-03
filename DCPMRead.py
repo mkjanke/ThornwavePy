@@ -20,6 +20,7 @@
 #
 #	2020-08-05	V 0.1 - Initial
 #	2021-01-23	V 0.2 - Swtich from gatttool to bluepy
+#	2021-06-03	V 0.3 - Reduce precision on measurement outputs to reflect precision of devices
 #
 #	Reads characteristic 0x15 from Thornwave Bluetooth Battery Monitor 
 #	Outputs in various formats
@@ -110,17 +111,17 @@ else:
     print (
 	'Time:            {timeNow:>20s}\n'
 	'Device:          {args.BLEaddress:>20s}\n'
-	'Pct Charged:     {PctCharged:>19.1f}%\n'
-	'V1 Volts:        {V1Volts:>19.3f}V\n'
-	'V2 Volts:        {V2Volts:>19.3f}V\n'
+	'Pct Charged:     {PctCharged:>19.0f}%\n'
+	'V1 Volts:        {V1Volts:>19.2f}V\n'
+	'V2 Volts:        {V2Volts:>19.2f}V\n'
         'Current:         {Current:>19.2f}A\n'
-        'Power:           {Power:>19.2f}W\n'
+        'Power:           {Power:>19.0f}W\n'
         'Temperature:     {Temperature:>19.1f}C\n'
-        'Power Meter:     {PowerMeter:>18.2f}Ah\n'
-        'Charge Meter:    {ChargeMeter:>19.2f}W\n'
+        'Power Meter:     {PowerMeter:>18.1f}Ah\n'
+        'Charge Meter:    {ChargeMeter:>19.1f}W\n'
         'Uptime:          {delta:>20s}\n'
         'Device Time:     {CurrentTime:>20d}\n'
-        'Peak Current:    {PeakCurrent:>18.2f}Ah'.format(**vars()))
+        'Peak Current:    {PeakCurrent:>18.1f}Ah'.format(**vars()))
 
   elif args.JSON:
   # Output in JSON
@@ -133,14 +134,14 @@ else:
 	'"Date": "{dateSplit}", '
         '"GMT": "{timeSplit}", '
         '"Address": "{args.BLEaddress}", '
-        '"Charge": "{PctCharged:.1f}", '
-        '"V1": "{V1Volts:.3f}", '
-        '"V2": "{V2Volts:.3f}", '
+        '"Charge": "{PctCharged:.0f}", '
+        '"V1": "{V1Volts:.2f}", '
+        '"V2": "{V2Volts:.2f}", '
         '"Current": "{Current:.2f}", '
-        '"Watts": "{Power:.2f}", '
+        '"Watts": "{Power:.0f}", '
         '"Temperature": "{Temperature:.1f}", '
-        '"PowerMeter": "{PowerMeter:.2f}", '
-        '"ChargeMeter": "{ChargeMeter:.2f}", '
+        '"PowerMeter": "{PowerMeter:.1f}", '
+        '"ChargeMeter": "{ChargeMeter:.1f}", '
         '"Uptime": "{delta}", '
         '"DeviceTime": "{CurrentTime:d}", '
         '"PeakCurrent": "{PeakCurrent:.2f}" '.format(**vars()), end =" ")
@@ -153,14 +154,14 @@ else:
     print (
 	'{timeNow} '
 	'{args.BLEaddress} '
-        '{PctCharged:6.1f} '
-        '{V1Volts:6.3f} '
-        '{V2Volts:6.3f} '
+        '{PctCharged:6.0f} '
+        '{V1Volts:6.2f} '
+        '{V2Volts:6.2f} '
         '{Current:6.2f} '
-        '{Power:6.2f} '
+        '{Power:6.0f} '
         '{Temperature:6.1f} '
-        '{PowerMeter:8.2f} '
-        '{ChargeMeter:6.2f} '
+        '{PowerMeter:8.1f} '
+        '{ChargeMeter:6.1f} '
         '{TimeSinceStart} '
         '{CurrentTime} '
         '{PeakCurrent:6.2f}'.format(**vars()))
