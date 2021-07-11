@@ -21,6 +21,7 @@
 #	2020-08-05	V 0.1 - Initial
 #	2021-01-23	V 0.2 - Swtich from gatttool to bluepy
 #	2021-06-03	V 0.3 - Reduce precision on measurement outputs to reflect precision of devices
+#	2021-07-11	V 0.4 - round() some variables and handle '-0' special case
 #
 #	Reads characteristic 0x15 from Thornwave Bluetooth Battery Monitor 
 #	Outputs in various formats
@@ -99,9 +100,20 @@ else:
     print(PctCharged, V1Volts, V2Volts, Current, Power, Temperature, PowerMeter, ChargeMeter, TimeSinceStart, CurrentTime, PeakCurrent)
 
   # Clean up vars
-  PctCharged = PctCharged/2
-  PowerMeter = PowerMeter/1000
-  ChargeMeter = ChargeMeter/1000
+  V1Volts = round(V1Volts, 2)
+  V2Volts = round(V2Volts, 2)
+  Temperature = round(Temperature, 1)
+  PctCharged = round(PctCharged/2, 0)
+  PowerMeter = round(PowerMeter/1000, 1)
+  ChargeMeter = round(ChargeMeter/1000, 1)
+
+  # Handle '-0' special cases
+  Power = round(Power, 0)
+  if Power > -1 and Power < 1 :
+    Power = 0
+  Current = round(Current, 2)
+  if Current > -1 and Current <1 :
+    Current = 0
 
   delta = str(timedelta(seconds=TimeSinceStart))
 
