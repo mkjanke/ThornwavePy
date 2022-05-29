@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#	Copyright 2020 Michael Janke
+#	Copyright 2020, 2022 Michael Janke
 #
 #	This program is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #	2021-01-23	V 0.2 - Swtich from gatttool to bluepy
 #	2021-06-03	V 0.3 - Reduce precision on measurement outputs to reflect precision of devices
 #	2021-07-11	V 0.4 - round() some variables and handle '-0' special case
+# 2022-05-29  V 0.5 - Change bluetooth library from bluepy to bluezero
 #
 #	Reads characteristic 0x15 from Thornwave Bluetooth Battery Monitor 
 #	Outputs in various formats
@@ -54,7 +55,7 @@ import struct
 import time
 from datetime import datetime
 from datetime import timedelta
-from bluepy.btle import Peripheral, BTLEException
+from bluezero import central
 
 # Slurp up command line arguments
 __author__ = 'Michael Janke'
@@ -74,21 +75,28 @@ timeNow = (datetime.now()).strftime("%x %X")
 
 # Connect to thornwave. Try twice, then fail 
 try:
-  p = Peripheral(args.BLEaddress, addrType="random")
+  my_Sensor = central.Central(device_addr=args.BLEaddress)
 
-except BTLEException as ex:
+except:
   if args.verbose:
-    print("Read failed. ", ex)
+    print("Read failed. ")
   time.sleep(10)
   try:
-     p = Peripheral(args.BLEaddress, addrType="random")
+     my_Sensor = central.Central(device_addr=args.BLEaddress)
   except:
      if args.verbose:
-       print("Read failed. ", ex)
+       print("Read failed. ")
      exit
 
 else:
-  result=p.readCharacteristic(0x15)
+  ch = my_Sensor.add_characteristic("7a95ce00-0ea8-1bcc-71a2-fc7539b81c9c", "7a95ce01-0ea8-1bcc-71a2-fc7539b81c9c")
+  my_Sensor.load_gatt()
+  my_Sensor.connect()
+  if args.verbose:
+    print(my_Sensor.services_available)
+
+  result=bytes(ch.read_raw_value())
+
   if args.verbose:
     print(result)
 
