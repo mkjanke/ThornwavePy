@@ -2,12 +2,13 @@ Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor <
 
   * Requires functioning BlueTooth stack & gatttool.
   * Tested on Raspberry Pi 3b+ Raspbian 5.4 with default BT stack.
+  * Currently functions only with firmware <= version 2.03. Newer firmware uses different UUIDs and data formats. 
 
 Inspiration and data format credit to Stuart Wilde via this forum post:
 
     https://www.irv2.com/forums/f54/thornwave-battery-monitor-375463.html#post4215155
 
-Setup:
+## Setup:
 
 Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
   
@@ -41,7 +42,7 @@ Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
 
   The script will read and parse the data in 0x15.
 
-Data Format:
+## Data Format (Version <= 2.03)):
 
   Fields
   
@@ -59,7 +60,21 @@ Data Format:
     51 - 48: Peak Current, 32-bit float
     52+    : Unknown
 
-Help:
+## Data Format (Version > 2.03)):
+
+  Fields
+  
+     0 - 4:  Unknown
+     8 - 5:  Date/Time Unix Epoc, LSB, 32-bit Uint 
+     9 - 12: Unknown
+    16 - 13: V1 volts, LSB, 32-bit float
+    20 - 17: V2 volts, LSB, 32-bit float
+    24 - 21: Current (amps), LSB, 32-bit float
+    28 - 25: Power (watts), LSB, 32-bit float
+    48 - 45: Temperature (C), LSB, 32-bit float
+    48 +   : Unknown
+
+## Help:
 
     sudo ./DCPMRead.py -h
     
@@ -78,7 +93,7 @@ To run:
 
     sudo ./DCPMRead.py -b <bluetooth address>
 
-Notes:
+## Notes:
 
   * bluetoothctl and gatttool may require sudo privs. The python script may also need sudo privs.
   * To create log, run periodically from cron & pipe output to a file with >>
