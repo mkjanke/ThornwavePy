@@ -24,6 +24,7 @@
 #	2021-07-11	V 0.4 - round() some variables and handle '-0' special case
 #	2022-05-29	V 0.5 - Change bluetooth library from bluepy to bluezero
 #	2022-07-18	V 0.6 - Initial support for firmware version > 2.03 (PowermonX)
+# 2022-12/29  V 0.7 - Add Power Meter and Charge Meter fields to V >2.03 output
 #
 #	Reads characteristic 0x15 from Thornwave Bluetooth Battery Monitor 
 #	Outputs in various formats
@@ -58,8 +59,8 @@
 #   20 - 17: V2 volts, LSB, 32-bit float
 #   24 - 21: Current (amps), LSB, 32-bit float
 #   28 - 25: Power (watts), LSB, 32-bit float
-#	  36 - 29: Power Meter (watts * 1000), 64-bit int
-#	  44 - 37: Charge Meter (Amp-hours * 1000), 64-bit int
+#   36 - 29: Power Meter (watts * 1000), 64-bit int
+#   44 - 37: Charge Meter (Amp-hours * 1000), 64-bit int
 #   48 - 45: Temperature (C), LSB, 32-bit float
 #   48 +   : Unknown
 
