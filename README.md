@@ -71,6 +71,8 @@ Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
     20 - 17: V2 volts, LSB, 32-bit float
     24 - 21: Current (amps), LSB, 32-bit float
     28 - 25: Power (watts), LSB, 32-bit float
+    36 - 29: Power Meter (watts * 1000), 64-bit int
+    44 - 37: Charge Meter (Amp-hours * 1000), 64-bit int
     48 - 45: Temperature (C), LSB, 32-bit float
     48 +   : Unknown
 
