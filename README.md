@@ -2,11 +2,14 @@ Python script(s) to read data from Thornwave BT DCPM BlueTooth battery monitor <
 
   * Requires functioning BlueTooth stack & gatttool.
   * Tested on Raspberry Pi 3b+ Raspbian 5.4 with default BT stack.
-  * Currently functions only with firmware <= version 2.03. Newer firmware uses different UUIDs and data formats. 
+  * Functions with firmware <= version 2.03 or >2.03 (-X parameter). Newer firmware uses different UUIDs and data formats. 
+  * PowerMeter and ChargeMeter are not properly interpreted when Thornwave is configured with current sign flipped.
 
 Inspiration and data format credit to Stuart Wilde via this forum post:
 
     https://www.irv2.com/forums/f54/thornwave-battery-monitor-375463.html#post4215155
+
+And @tgalarneau for PowerMeter and ChargeMeter on version > 2.03
 
 ## Setup:
 
@@ -90,6 +93,7 @@ Use bluetoothctl to find BlueTooth MAC address of Thornwave device(s)
       -H, --Human           Human readable output
       -J, --JSON            JSON output
       -v, --verbose         debug output
+      -X, --PowermonX       PowermonX version >2.03 format
 
 To run:
 

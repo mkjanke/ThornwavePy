@@ -18,12 +18,12 @@
 #	Inspiration and data format credit to Stuart Wilde via this forum post:
 #		https://www.irv2.com/forums/f54/thornwave-battery-monitor-375463.html#post4215155
 #
-#	2020-08-05	V 0.1 - Initial
-#	2021-01-23	V 0.2 - Swtich from gatttool to bluepy
-#	2021-06-03	V 0.3 - Reduce precision on measurement outputs to reflect precision of devices
-#	2021-07-11	V 0.4 - round() some variables and handle '-0' special case
-#	2022-05-29	V 0.5 - Change bluetooth library from bluepy to bluezero
-#	2022-07-18	V 0.6 - Initial support for firmware version > 2.03 (PowermonX)
+# 2020-08-05	V 0.1 - Initial
+# 2021-01-23	V 0.2 - Swtich from gatttool to bluepy
+# 2021-06-03	V 0.3 - Reduce precision on measurement outputs to reflect precision of devices
+# 2021-07-11	V 0.4 - round() some variables and handle '-0' special case
+# 2022-05-29	V 0.5 - Change bluetooth library from bluepy to bluezero
+# 2022-07-18	V 0.6 - Initial support for firmware version > 2.03 (PowermonX)
 # 2022-12/29  V 0.7 - Add Power Meter and Charge Meter fields to V >2.03 output
 #
 #	Reads characteristic 0x15 from Thornwave Bluetooth Battery Monitor 
